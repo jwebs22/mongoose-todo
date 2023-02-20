@@ -25,6 +25,4 @@ router.delete("/delete-multi", tasksController.deleteMulti);
 router.post("/create-multi", tasksController.createMulti);
 
 
-
-
 module.exports = router;

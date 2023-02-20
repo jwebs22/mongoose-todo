@@ -66,6 +66,9 @@ async function deleteOneById(req, res, next)
 };
 
 // PUT Update a task by id to mark it complete
+//I didn't know how to create a toggle on the same route, 
+//so made a seperate route for complete/incomplete. 
+//I tried using $bit, but just didn't understand what it was doing.
 async function updateTaskComplete(req, res, next)
 {
   const updateId = req.params.id;
@@ -93,7 +96,7 @@ async function updateTaskComplete(req, res, next)
 };
 
 //PUT Update a task by ID to mark incomplete
-//I didn't know how to create this on the same route, so made a seperate route for it.
+
 async function updateTaskIncomplete(req, res, next)
 {
   const updateId = req.params.id;
@@ -146,6 +149,15 @@ async function createMulti(req, res, next)
     const description = req.body.description 
     const completed = req.body.completed
 
+    /*I just don't understand this. I'm seeing documentation
+    that shows: const users = [
+  { name: 'Alice', email: 'alice@example.com', age: 30 },
+  { name: 'Bob', email: 'bob@example.com', age: 40 },
+  { name: 'Charlie', email: 'charlie@example.com', age: 50 }
+  ];
+    but I don't know how to translate this when using Postman
+    to test it.
+    */
     const newTasks = await Tasks.insertMany(
       [{name, description, completed},
        {name, description, completed}]
