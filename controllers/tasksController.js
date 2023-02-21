@@ -139,7 +139,7 @@ async function deleteMulti(req, res, next)
     
 }
 
-// POST Create Multi --BROKEN
+// POST Create Multi --DONE
 
 async function createMulti(req, res, next)
 {
@@ -149,40 +149,21 @@ async function createMulti(req, res, next)
     const description = req.body.description 
     const completed = req.body.completed
 
-    /*I just don't understand this. I'm seeing documentation
-    that shows: const users = [
-  { name: 'Alice', email: 'alice@example.com', age: 30 },
-  { name: 'Bob', email: 'bob@example.com', age: 40 },
-  { name: 'Charlie', email: 'charlie@example.com', age: 50 }
-  ];
-    but I don't know how to translate this when using Postman
-    to test it.
-    */
-    const newTasks = await Tasks.insertMany(
-      [{name, description, completed},
-       {name, description, completed}]
-    )
+    const newTasks = req.body
+    const savedTasks = await Tasks.create(newTasks)
     
-    const savedData =  await newTasks.save();
     res.json({
         success: true,
-        tasks: savedData
+        tasks: savedTasks
     });
     
   } catch (err) {
     console.log(err);
     throw err;
   }
-
-  // res.json({
-  //   success: true,
-  //   message: "test"
-  // })
 }
 
 
-
-  
 module.exports = {
     createOneTask,
     getAllTasks,
